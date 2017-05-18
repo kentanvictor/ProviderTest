@@ -54,5 +54,27 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+        Button updateData = (Button) findViewById(R.id.update_data);
+        //更新数据
+        updateData.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Uri uri = Uri.parse("content://com.example.dell.databasetest.provider/book" + newId);
+                ContentValues values = new ContentValues();
+                values.put("name","A storm of Swords");
+                values.put("pages",1216);
+                values.put("price",24.05);
+                getContentResolver().update(uri,values,null,null);
+            }
+        });
+        Button deleteData = (Button) findViewById(R.id.delete_data);
+        //删除数据
+        deleteData.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Uri uri = Uri.parse("content://com.example.dell.databasetest.provider/book" + newId);
+                getContentResolver().delete(uri,null,null);
+            }
+        });
     }
 }
