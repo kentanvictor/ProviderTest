@@ -20,14 +20,17 @@ public class MainActivity extends AppCompatActivity {
         addData.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Uri uri = Uri.parse("content://com.example.dell.databasetest.provider/book");
-                ContentValues values = new ContentValues();
+                Uri uri = Uri.parse("content://com.example.dell.databasetest.provider/book");//将一个内容URI解析成Uri对象
+                ContentValues values = new ContentValues();//把需要添加的数据都存放到ContentValues对象中
                 values.put("name","A Clash of Kings");
                 values.put("author","George Martin");
                 values.put("pages",1040);
                 values.put("price",22.85);
-                Uri newUri = getContentResolver().insert(uri,values);
+                Uri newUri = getContentResolver().insert(uri,values);//调用ContentResolver的insert()方法执行添加操作
                 newId = newUri.getPathSegments().get(1);
+                /**
+                 * 把insert()方法返回的返回的Uri对象中的新的id通过getPathSegments()方法将这个id取出
+                * */
             }
         });
         Button queryData = (Button) findViewById(R.id.query_data);
@@ -49,8 +52,7 @@ public class MainActivity extends AppCompatActivity {
                         Log.d("MainActivity","book author is "+ author);
                         Log.d("MainActivity","book pages is "+ pages);
                         Log.d("MainActivity","book price is "+ pages);
-                    }
-                    cursor.close();
+                    }cursor.close();
                 }
             }
         });
